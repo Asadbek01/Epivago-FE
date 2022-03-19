@@ -103,7 +103,7 @@ const SignUp = () => {
          type='submit'>
           Create Account
         </Button>
-        <p>Already have an account? <a href="/login">Login</a></p>
+        <p>Already have an account? <a href="/">Login</a></p>
 
       </Form>
       </Col>

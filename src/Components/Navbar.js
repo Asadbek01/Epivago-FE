@@ -18,7 +18,7 @@ const MyNavBar = () => {
    <div className="d-flex ">
      
         <Button className="btn-light" onClick={()=> navigate('/signUp')}>Sign Up</Button>
-        <Button className="btn-primary ml-2" onClick={()=> navigate('/login')}>Login</Button>
+        <Button className="btn-primary ml-2" onClick={()=> navigate('/')}>Login</Button>
         
               </div>
               </div>
