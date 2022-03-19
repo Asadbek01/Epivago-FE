@@ -1,10 +1,12 @@
 import React, { useState } from "react";
-import { Form, Button,  Row, Col } from "react-bootstrap";
+import { Form, Button,  Row, Col, Navbar } from "react-bootstrap";
 import Home from "./Home";
+import MyNavBar from "./Navbar";
 import { useNavigate } from "react-router";
  import { BsGoogle } from "react-icons/bs";
 const Login = () => {
     const navigate = useNavigate()
+    const [ register, setRegister] = useState(false)
   const [registration, setRegistration] = useState({
    
     email: "",
@@ -30,6 +32,7 @@ const Login = () => {
         },
       });
       if (response.ok) {
+        setRegister(true)
         const authors = await response.json();
         localStorage.setItem("MyToken", authors.accessToken);
         setRegistration({
@@ -46,9 +49,14 @@ const Login = () => {
   };
   return (
     <>
+          {register? (
+            <>
+            <MyNavBar />
+<Home />
+</>
+) : (
         <Row className="d-flex justify-content-center mt-4">
           <Col md={4} xs={6} sm={3}>
-      
               <div className="register-form">
                 <Button className="btn-light mb-2" style={{ width: "40%" }}><a href="http://localhost:3002/user/googleLogin"><BsGoogle className="mr-2" />Google Login</a></Button>
               <Form onSubmit={handleSubmit}>
@@ -68,7 +76,7 @@ const Login = () => {
                     onChange={(e) => {
                       handleInput("email", e.target.value);
                     }}
-                  />
+                    />
                 </Form.Group>
                 <Form.Group>
                 
@@ -80,7 +88,7 @@ const Login = () => {
                     onChange={(e) => {
                       handleInput("password", e.target.value);
                     }}
-                  />
+                    />
                 </Form.Group>
                 <Form.Group className="d-flex mt-4">
           <Form.Check
@@ -91,16 +99,16 @@ const Login = () => {
             onChange={(e) => {
               handleInput('rememberMe', e.target.checked)
             }}
-          />
-           
+            />
+        
 
                 <Button
                 
-                  variant="primary"
+                variant="primary"
                   type="submit"
                 //   style={{ width: "25%" }}
                   className="ml-auto rounded-pill"
-                >
+                  >
                   Login
                 </Button>
 
@@ -116,12 +124,13 @@ const Login = () => {
               </div>
             
               </Form>
-            </div>
 <p className="mt-4">Don't have an account? <a href="/signUp">Sign Up</a></p>
+            </div>
       
       </Col>
-    </Row>
-    </>
-  );
-};
+      </Row>
+      ) }
+      </>
+      );
+    };
 export default Login;
